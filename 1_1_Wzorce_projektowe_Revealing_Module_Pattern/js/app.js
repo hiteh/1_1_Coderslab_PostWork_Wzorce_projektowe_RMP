@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function(){
             button.className!=="button-equal"?
             button.addEventListener("click",function(event){
               event.preventDefault();
+              addCharacter(event.target.innerHTML);
               console.log("Naciśnięto przycisk!");
             }):
             button.addEventListener("click", function(event){
@@ -29,8 +30,8 @@ document.addEventListener("DOMContentLoaded", function(){
 
         }
 
-        function addCharacter() {
-
+        function addCharacter(data) {
+          equationView.innerHTML+=data;
         }
 
         function calculate() {
@@ -42,6 +43,7 @@ document.addEventListener("DOMContentLoaded", function(){
         }
 
         function init() {
+          console.log(equationView);
           attachEvents();
         }
 
