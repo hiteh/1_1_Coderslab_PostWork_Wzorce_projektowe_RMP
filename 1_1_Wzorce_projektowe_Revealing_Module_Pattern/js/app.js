@@ -8,7 +8,17 @@ document.addEventListener("DOMContentLoaded", function(){
         var operations = ["+", "-", "*", "/", ","];
 
         function attachEvents() {
-            
+          buttons.forEach(function(button){
+            button.className!=="button-equal"?
+            button.addEventListener("click",function(event){
+              event.preventDefault();
+              console.log("Naciśnięto przycisk!");
+            }):
+            button.addEventListener("click", function(event){
+              event.preventDefault();
+              console.log("Sprawdzam wynik działania!");
+            })
+          });
         }
 
         function checkEquation() {
@@ -32,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function(){
         }
 
         function init() {
-            
+          attachEvents();
         }
 
         return {
