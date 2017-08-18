@@ -71,10 +71,11 @@ document.addEventListener("DOMContentLoaded", function(){
           checkIfCharIsOperation(eq[eq.length-1])?eq = eq.substring(0,eq.length-1): false;
           var sum = eval(eq);
           equationView.innerText = sum;
+          updateHistory(eq,sum);
         }
 
-        function updateHistory() {
-
+        function updateHistory(data, answer) {
+          historyView.innerHTML += '<p>'+data+' = '+answer+'</p>';
         }
 
         function init() {
