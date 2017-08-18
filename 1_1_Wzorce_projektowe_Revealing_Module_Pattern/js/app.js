@@ -22,14 +22,39 @@ document.addEventListener("DOMContentLoaded", function(){
           });
         }
 
+        function checkIfDoubleComma(data) {
+          if(data==","){
+            var results = equationView.innerText.slice(equationView.innerText.lastIndexOf(data));
+            if(results[0]!==","){
+              return true;
+            } else {
+              if(results.includes("/")) {
+                return true;
+              } else if (results.includes("*")) {
+                return true;
+              } else if(results.includes("-")) {
+                return true;
+              } else if(results.includes("+")) {
+                return true;
+              } else {
+                return false;
+              }
+            }
+          } else {
+            return true;
+          }
+        }
+
         function checkEquation(data) {
-          return (
-            operations[operations.indexOf(equationView.innerText[equationView.innerText.length-1])]&&
-            checkIfCharIsOperation(data)||
-            equationView.innerText.length===0&&checkIfCharIsOperation(data)?
-            false:
-            true
-          );
+          if(checkIfDoubleComma(data)){
+            return (
+              operations[operations.indexOf(equationView.innerText[equationView.innerText.length-1])]&&
+              checkIfCharIsOperation(data)||
+              equationView.innerText.length===0&&checkIfCharIsOperation(data)?
+              false:
+              true
+            );
+          }
         }
 
         function checkIfCharIsOperation(data) {
