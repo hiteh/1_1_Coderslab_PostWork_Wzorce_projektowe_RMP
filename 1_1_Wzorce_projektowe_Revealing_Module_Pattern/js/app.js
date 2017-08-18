@@ -12,8 +12,8 @@ document.addEventListener("DOMContentLoaded", function(){
             button.className!=="button-equal"?
             button.addEventListener("click",function(event){
               event.preventDefault();
-              addCharacter(event.target.innerHTML);
-              console.log("Naciśnięto przycisk!");
+              var canIAddChar = checkEquation(event.target.innerHTML);
+              addCharacter(event.target.innerHTML, canIAddChar);
             }):
             button.addEventListener("click", function(event){
               event.preventDefault();
@@ -22,16 +22,23 @@ document.addEventListener("DOMContentLoaded", function(){
           });
         }
 
-        function checkEquation() {
-
+        function checkEquation(data) {
+          return (
+            operations[operations.indexOf(equationView.innerText[equationView.innerText.length-1])]&&
+            checkIfCharIsOperation(data)||
+            equationView.innerText.length===0&&checkIfCharIsOperation(data)?
+            false:
+            true
+          );
         }
 
-        function checkIfCharIsOperation() {
-
+        function checkIfCharIsOperation(data) {
+          return operations.indexOf(data)!==-1?true:false;
         }
 
-        function addCharacter(data) {
-          equationView.innerHTML+=data;
+        function addCharacter(data, canIAddChar) {
+          canIAddChar? equationView.innerText+=data: false;
+          console.log(equationView.innerText);
         }
 
         function calculate() {
@@ -43,7 +50,6 @@ document.addEventListener("DOMContentLoaded", function(){
         }
 
         function init() {
-          console.log(equationView);
           attachEvents();
         }
 

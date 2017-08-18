@@ -53,6 +53,7 @@ html, body {
     color: #F0EFED;
     padding: 5px;
     overflow: hidden;
+    white-space: nowrap;
 }
 
 .calc-box {
