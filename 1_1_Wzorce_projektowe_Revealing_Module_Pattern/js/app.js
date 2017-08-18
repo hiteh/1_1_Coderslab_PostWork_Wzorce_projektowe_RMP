@@ -68,6 +68,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
         function calculate() {
           var eq = equationView.innerText;
+          checkIfCharIsOperation(eq[eq.length-1])?eq = eq.substring(0,eq.length-1): false;
           var sum = eval(eq);
           equationView.innerText = sum;
         }
