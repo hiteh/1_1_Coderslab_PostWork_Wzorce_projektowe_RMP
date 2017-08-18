@@ -5,27 +5,28 @@ document.addEventListener("DOMContentLoaded", function(){
         var buttons = document.querySelectorAll("button");
         var historyView = document.querySelector(".calc-history");
         var equationView = document.querySelector(".calc-view");
-        var operations = ["+", "-", "*", "/", ","];
+        var operations = ["+", "-", "*", "/", "."];
 
         function attachEvents() {
           buttons.forEach(function(button){
             button.className!=="button-equal"?
             button.addEventListener("click",function(event){
               event.preventDefault();
-              var canIAddChar = checkEquation(event.target.innerHTML);
-              addCharacter(event.target.innerHTML, canIAddChar);
+              var char = event.target.innerHTML===","?".":event.target.innerHTML;
+              var canIAddChar = checkEquation(char);
+              addCharacter(char, canIAddChar);
             }):
             button.addEventListener("click", function(event){
               event.preventDefault();
-              console.log("Sprawdzam wynik działania!");
+              calculate();
             })
           });
         }
 
         function checkIfDoubleComma(data) {
-          if(data==","){
+          if(data=="."){
             var results = equationView.innerText.slice(equationView.innerText.lastIndexOf(data));
-            if(results[0]!==","){
+            if(results[0]!=="."){
               return true;
             } else {
               if(results.includes("/")) {
@@ -63,11 +64,12 @@ document.addEventListener("DOMContentLoaded", function(){
 
         function addCharacter(data, canIAddChar) {
           canIAddChar? equationView.innerText+=data: false;
-          console.log(equationView.innerText);
         }
 
         function calculate() {
-
+          var eq = equationView.innerText;
+          var sum = eval(eq);
+          equationView.innerText = sum;
         }
 
         function updateHistory() {
